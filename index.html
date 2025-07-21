@@ -5,30 +5,42 @@
 
         <title>This is a test page</title>
         <link rel="stylesheet" href="style.css">
-        <!-- <style>
-            body {
-                font-family: Arial, Helvetica, sans-serif;
-                margin: 10pt;
-                padding: auto;
-                background-color: rgb(248, 247, 245);
-                color: black;
+        <script>
+
+            alert("Welcome to Elen's Personal Page!");
+            col = prompt("Please enter your favorite color:", "blue");
+            if (col != null && col != "") {
+                document.body.style.backgroundColor = col; // Change background color based on user input
             }
-            h1 {
-                text-align: center;
-                color: #41749e;
+
+             // Function to change background color on page load
+
+            function myFunction() {
+                document.body.style.backgroundColor =col; // Change background color to pink
+             }
+
+            function imgChangeDimensions() {
+                var img = document.getElementById('panda');
+                img.style.width = '600px';
+                img.style.height = '350px';
             }
-            h2 {
-                color: #333;
+
+            function imgBig() {
+                var img = document.getElementById('panda');
+                img.style.width = '400px';
+                img.style.height = '300px';
             }
-            p {
-                text-transform: capitalize;
-                font-size: 16px;
-                color: #555;
+
+            function imgSmall() {
+                var img = document.getElementById('panda');
+                img.style.width = '200px';
+                img.style.height = '200px';
             }
-        </style> -->
+
+        </script>
     </head>
 
-    <body>
+    <body onload="myFunction();">
        
         <h2>Xi'An Training Guide</h2>
 
@@ -53,6 +65,12 @@
             and is a key stop on the Silk Road,
             making it a significant cultural and historical hub.    
         </p>
+
+        <img id="panda" src="panda.jpg" 
+         style="width:200px;height:200px;display:block;margin:0 auto;" 
+         alt="Panda Image" onclick="imgChangeDimensions();"
+         ommouseover="imgBig();"
+         onmouseout="imgSmall();">
 
     </body>
 </html>

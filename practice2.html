@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #17abf0;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #5081eb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #5081eb;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e8f5e9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .horizontal-group {
+            display: flex;
+            gap: 10px; /* Add spacing between options */
+            margin-bottom: 15px;
+        }
+        .horizontal-group label {
+            margin: 0; /* Remove margin for inline labels */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Information Form</h1>
+        <form id="userForm">
+            <!-- Name -->
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+            <div id="nameError" class="error"></div>
+
+            <!-- Age -->
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" required>
+            <div id="ageError" class="error"></div>
+
+            <!-- Gender -->
+            <label>Gender</label>
+            <div class="horizontal-group">
+                <label><input type="radio" name="gender" value="Male" required> Male</label>
+                <label><input type="radio" name="gender" value="Female" required> Female</label>
+                <label><input type="radio" name="gender" value="Other" required> Other</label>
+            </div>
+            <div id="genderError" class="error"></div>
+
+            <!-- Address -->
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="3" required></textarea>
+            <div id="addressError" class="error"></div>
+
+            <!-- City -->
+            <label for="city">City</label>
+            <select id="city" name="city" required>
+                <option value="">Select a city</option>
+                <option value="Beijing">Beijing</option>
+                <option value="Shanghai">Shanghai</option>
+                <option value="Guangzhou">Guangzhou</option>
+                <option value="Shenzhen">Shenzhen</option>
+            </select>
+            <div id="cityError" class="error"></div>
+
+            <!-- Postal Code -->
+            <label for="postalCode">Postal Code</label>
+            <input type="text" id="postalCode" name="postalCode" required>
+            <div id="postalCodeError" class="error"></div>
+
+            <!-- Hobbies -->
+            <label>Hobbies</label>
+            <div class="horizontal-group">
+                <label><input type="checkbox" name="hobbies" value="Watching Movies"> Watching Movies</span></label>
+                <label><input type="checkbox" name="hobbies" value="Singing"> Singing</label>
+                <label><input type="checkbox" name="hobbies" value="Reading"> Reading</label>
+                <label><input type="checkbox" name="hobbies" value="Traveling"> Traveling</label>
+            </div>
+            <div id="hobbiesError" class="error"></div>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        </form>
+        <div id="output" class="output" style="display: none;"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('userForm');
+        const output = document.getElementById('output');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            let isValid = true;
+
+            // Clear previous errors
+            document.querySelectorAll('.error').forEach(error => error.textContent = '');
+
+            // Validate Name
+            const name = document.getElementById('name').value.trim();
+            if (!name) {
+                document.getElementById('nameError').textContent = 'Name is required.';
+                isValid = false;
+            }
+
+            // Validate Age
+            const age = document.getElementById('age').value.trim();
+            if (!age || age <= 0) {
+                document.getElementById('ageError').textContent = 'Age must be a positive number.';
+                isValid = false;
+            }
+
+            // Validate Gender
+            const gender = document.querySelector('input[name="gender"]:checked');
+            if (!gender) {
+                document.getElementById('genderError').textContent = 'Gender is required.';
+                isValid = false;
+            }
+
+            // Validate Address
+            const address = document.getElementById('address').value.trim();
+            if (!address) {
+                document.getElementById('addressError').textContent = 'Address is required.';
+                isValid = false;
+            }
+
+            // Validate City
+            const city = document.getElementById('city').value.trim();
+            if (!city) {
+                document.getElementById('cityError').textContent = 'City is required.';
+                isValid = false;
+            }
+
+            // Validate Postal Code
+            const postalCode = document.getElementById('postalCode').value.trim();
+            if (!postalCode) {
+                document.getElementById('postalCodeError').textContent = 'Postal Code is required.';
+                isValid = false;
+            }
+
+            // Validate Hobbies
+            const hobbies = document.querySelectorAll('input[name="hobbies"]:checked');
+            if (hobbies.length === 0) {
+                document.getElementById('hobbiesError').textContent = 'At least one hobby must be selected.';
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Display output
+                output.style.display = 'block';
+                output.innerHTML = `
+                    <h2>Submitted Information</h2>
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Age:</strong> ${age}</p>
+                    <p><strong>Gender:</strong> ${gender.value}</p>
+                    <p><strong>Address:</strong> ${address}</p>
+                    <p><strong>City:</strong> ${city}</p>
+                    <p><strong>Postal Code:</strong> ${postalCode}</p>
+                    <p><strong>Hobbies:</strong> ${Array.from(hobbies).map(hobby => hobby.value).join(', ')}</p>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <style>
+            h1{
+                color: aliceblue;
+            }
+
+        </style>
+        <script>
+            function validateForm() {
+                var username = document.forms["regForm"]["username"].value;
+                var email = document.getElementById("email").value;
+                var password = document.getElementById("password").value;
+
+                if (username == "" || email == "" || password == "") {
+                    alert("All fields must be filled out");
+                    return false;
+                }
+                return true;
+            }
+
+            username = " "
+            function readName() {
+                //username = document.getElementById("username").value;
+                username =document.regForm.username.value
+                if (username) {
+                    alert("Hello, " + username + "! Welcome to the registration page.");
+                } else {
+                    alert("Please enter your name.");
+                }
+            }
+            function checkPasswordLength() {
+                var password = document.getElementById("password").value;
+                if (password.length < 8) {
+                    alert("Password must be at least 8 characters long.");
+                    document.getElementById("passwordErroText").focus();
+                    return false;
+                }
+                return true;
+            }
+
+            function checkPassword() {
+                var password = document.getElementById("password").value;
+                var confirmPassword = document.getElementById("confirmPassword").value;
+
+                if (password !== confirmPassword) {
+                    alert("Passwords do not match.");
+                    return false;
+                }
+                return true;
+            }
+        </script>
+       
+    </head>
+    <body>
+        <h1>User Registration</h1>
+        <table>
+            <tr>
+                <td>Username</td>
+                <td><input type="text" id="username" name="username" 
+                    placeholder="Enter your username" required></td>
+            </tr>  
+            
+            <tr>
+                <td>Email</td>
+                <td><input type="email" id="email" name="email" required></td>  
+            </tr>
+
+            <tr>
+                <td>Password</td>
+                <td><input type="password" id="password" name="password" required onblur="checkPasswordLength()"></td>  
+            </tr>
+            <tr>
+                <td>Confirm Password</td>
+                <td><input type="password" id="confirmPassword" name="confirmPassword" required onblur="checkPassword()"></td>  
+            </tr>
+
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <!-- <button type="button" onclick="readName()">Click Me</button> -->
+                    <input type="submit" value="Register" onclick="return validateForm()">
+                </td>
+            </tr>
+        </table>
+        <!-- <form action="registration.html" method="get" name="regForm" >
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required><br><br>
+            
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <span id="passwordErroText" style="color: red;"></span><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required onblur="checkPasswordLength"><br><br>
+
+            <label for="confirmPassword">confirmPassword:</label><br>
+            <input type ="confirmPassword" id="confirmPassword" name="confirmPassword" required><br><br>
+            
+            <input type="submit" value="Register"> -->
+    </body>
+
+</html>

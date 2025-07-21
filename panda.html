@@ -39,23 +39,36 @@
                 padding-left: 20px;
             } !
         </style>-->
+        <script>
+           /* window.onload = function() {
+                document.body.style.backgroundColor = "grey"; // Light background color
+             };
+            */
+           
+             function myFunction() {
+                document.body.style.backgroundColor = "grey";
+             }
+        </script>
+        
     </head>
 
-    <body>
+    <body onload="myFunction()">
+        <a href="register.html" title="User-Register" style="text-decoration: none; color: black;">
        <header>
-            <h1>Welcome to Elen's Page</h1>
+            <h1 >Welcome to Elen's Page</h1>
         </header>
         <div class="container">
             <img src="panda.jpg"  style="width:200px;height:200px;">
-            <h2>About Me</h2>
-            <button ondblclick="alert('Hi,I!')"></button>
+
+            <h2 onclick="myFunction();">About Me</h2>
+            <button ondblclick="alert('Hi,I!')">Learn More</button>
             <p>Hi, I'm Elen, and I come from China,
                 I'm a cute and cuddly animal native to China. 
                 I love eating bamboo and spending my days lounging around.
                 I'm also a symbol of peace and friendship, 
                 and I hope to bring joy to everyone I meet!</p>
 
-            <h2>Education</h2>
+            <h2 on>Education</h2>
             <ul>
                 <li>Software Engineering - NWU (2018-2022)</li>
                 <li>Software Engineering - NWU(2022-2025)</li>
@@ -73,6 +86,7 @@
             </ul>
 
         </div>
+        <!-- <img src="image/image1.jpg"  style="width:200px;height:200px;display:block;margin:0 auto;"> -->
         <footer>
             <p>&copy; 2025 Elen. All rights reserved.</p> 
        
