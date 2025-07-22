@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Movies Information API</title>
+
+        <body>
+            <h1>Movies Information api</h1>
+            <ul id="movielist">
+
+            </ul>
+            <h1>Add new movie</h1>
+            <form id="addmovieForm">
+                <input type="text" id="name" placeholder="Enter name" required>
+                <input type="text" id="year" placeholder="Enter year" required>
+                <button type="submit">Add movie</button>
+            </form>
+
+            <script>
+                const movielist = document.getElementById('movielist');
+                const movieForm = document.getElementById('addmovieForm');
+                const moviename = document.getElementById('name');
+                const movieyear = document.getElementById('year');
+
+                //function to fetch and display movies
+                function getAllMovies(){
+                    fetch('/movies')
+                    .then(res=>res.json())
+                    .then (movies=>{
+                        movielist.innerHTML = '';
+                        movies.forEach(movie => {
+                            const li = document.createElement('li');
+                            li.textContent = ` 《${movie.name}》,[${movie.year}]`;
+                            movielist.appendChild(li);
+                        });
+                    })
+                }
+                addmovieForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = moviename.value;
+                   const year = movieyear.value;
+                    if(!name || !year) return;
+                   //  if(!name) return; 
+                    // post the name to the api
+                    fetch('/movies', {
+                       method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({name, year})
+                      
+                    })
+                    .then(res => res.json())
+                    .then(movie => {
+                        console.log('Movie added:', movie);
+                        getAllMovies(); // Refresh the movie list
+                        movieForm.reset(); // Clear the form
+                    })
+                    .catch(err => console.error('Error adding movie:', err));
+                });
+
+                getAllMovies();
+            </script>
+        </body>
+        
+    </head>
+</html>
